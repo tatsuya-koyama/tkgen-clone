@@ -1,0 +1,365 @@
+//===== macros for tkgen
+
+//----- Heading
+define ^=([^=]+)
+	//<h1>\1</h1>
+	<h1><img class="title_head" src="$HOME/resource/image/icon/tkstyle_trademark_s.png" />\1</h1>
+
+define ^==([^=]+)
+	<h2>\1</h2>
+
+define ^===([^=]+)
+	<h3>\1</h3>
+
+define ^====([^=]+)
+	<h4>\1</h4>
+
+define ^==modern::([^=]+)
+	<h2 class="modern">\1</h2>
+
+
+//-----  List
+// Unordered List
+define ^-([^-]+.*)
+	<li>\1</li>
+	if_prev (^[^-]+|^$) then <ul class="level1">
+	if_next ^[^-]*$ then </ul>
+
+define ^--([^-]+)
+	<li>\1</li>
+	if_prev ^-[^-]+ then <ul class="level2">
+	if_next (^[^-]*$|^-[^-]+) then </ul>
+
+define ^---([^-]+)
+	<li>\1</li>
+	if_prev (^-[^-]+|^--[^-]+) then <ul class="level3">
+	if_next (^[^-]*$|^-[^-]+|^--[^-]+) then </ul>
+
+define ^----([^-]+)
+	<li>\1</li>
+	if_prev (^-[^-]+|^--[^-]+|^---[^-]+) then <ul class="level4">
+	if_next (^[^-]*$|^-[^-]+|^--[^-]+|^---[^-]+) then </ul>
+
+// Ordered List
+
+
+//----- Typography
+// Paragraphs
+define ^{$
+	<p class="chapter">
+	option indent
+
+define ^{{$
+	<p class="section">
+	option indent
+
+define ^{{{$
+	<p class="subsection">
+	option indent
+
+define ^}+$
+	</p>
+	option unindent
+
+// Blockquote
+
+//----- Horizontal Rules
+
+
+//----- Inline Text Styles
+// updated date
+define ^date:(.*)
+	<p class="update_time">Last update: \1<br/>Written by Tatsuya Koyama</p>
+
+// image caption
+define ^caption::(.*)
+	<p class="caption">\1</p>
+
+// size
+define ~\[(.*?)\]
+	<em class="small1">\1</em>
+
+define ~~\[(.*?)\]
+	<em class="small2">\1</em>
+
+define ~~~\[(.*?)\]
+	<em class="small3">\1</em>
+
+define ~~~~\[(.*?)\]
+	<em class="small4">\1</em>
+
+define ~~~~~\[(.*?)\]
+	<em class="small5">\1</em>
+
+define \+\[(.*?)\]
+	<em class="large1">\1</em>
+
+define \+\+\[(.*?)\]
+	<em class="large2">\1</em>
+
+define \+\+\+\[(.*?)\]
+	<em class="large3">\1</em>
+
+define \+\+\+\+\[(.*?)\]
+	<em class="large4">\1</em>
+
+define \+\+\+\+\+\[(.*?)\]
+	<em class="large5">\1</em>
+
+// context color
+define （(.*?)）
+	<em class="paren">（\1）</em>
+
+define 「(.*?)」
+	<em class="square-bracket">「\1」</em>
+
+define v「(.*?)」
+	<em class="voice">「\1」</em>
+
+define se{(.*?)}
+	<em class="emphasis1">\1</em>
+
+define se{（(.*?)）}
+	<em class="emphasis1">（\1）</em>
+
+define e{(.*?)}
+	<em class="emphasis2">\1</em>
+
+define e{（(.*?)）}
+	<em class="emphasis2">（\1）</em>
+
+define e{{(.*?)}}
+	<em class="emphasis3">\1</em>
+
+define e{{（(.*?)）}}
+	<em class="emphasis3">（\1）</em>
+
+define ne{(.*?)}
+	<em class="negative-emphasis">\1</em>
+
+define ne{（(.*?)）}
+	<em class="negative-emphasis">（\1）</em>
+
+define s{(.*?)}
+	<em class="silence">\1</em>
+
+define s{（(.*?)）}
+	<em class="silence">（\1）</em>
+
+define tk{(.*?)}
+	<em class="tsukkomi">\1</em>
+
+define tk{（(.*?)）}
+	<em class="tsukkomi">（\1）</em>
+
+define stk{(.*?)}
+	<em class="self-tsukkomi">\1</em>
+
+define stk{（(.*?)）}
+	<em class="self-tsukkomi">（\1）</em>
+
+define htk{(.*?)}
+	<em class="hiki-tsukkomi">\1</em>
+
+define htk{（(.*?)）}
+	<em class="hiki-tsukkomi">（\1）</em>
+
+define pb{(.*?)}
+	<em class="positive-boke">\1</em>
+
+define pb{（(.*?)）}
+	<em class="positive-boke">（\1）</em>
+
+define nb{（(.*?)）}
+	<em class="negative-boke">（\1）</em>
+
+define nb{(.*?)}
+	<em class="negative-boke">\1</em>
+
+define joy{(.*?)}
+	<em class="joy">\1</em>
+
+define sad{(.*?)}
+	<em class="sad">\1</em>
+
+define \?{(.*?)}
+	<em class="thinking">\1</em>
+
+define \?{（(.*?)）}
+	<em class="thinking">（\1）</em>
+
+define \?\?{(.*?)}
+	<em class="unsure">\1</em>
+
+define \?\?{（(.*?)）}
+	<em class="unsure">（\1）</em>
+
+define kw{(.*?)}
+	<em class="keyword">\1</em>
+
+define kw{（(.*?)）}
+	<em class="keyword">（\1）</em>
+
+define lkw{(.*?)}
+	<em class="local-keyword">\1</em>
+
+define n{(.*?)}
+	<em class="name">\1</em>
+
+define t{(.*?)}
+	<em class="title">\1</em>
+
+define en{(.*?)}
+	<em class="enumerate">\1</em>
+
+define !{(.*?)}
+	<em class="caution">\1</em>
+
+define !{（(.*?)）}
+	<em class="caution">（\1）</em>
+
+define ex{(.*?)}
+	<em class="example">\1</em>
+
+define ex{（(.*?)）}
+	<em class="example">（\1）</em>
+
+define say{(.*?)}
+	<em class="saying">\1</em>
+
+
+
+//----- Inline Elements
+// newline
+define \\n
+	<br />
+
+// Link
+define @@(.*)::(.*)
+	<a href="\2.html">\1</a>
+
+// External Link
+define ex@@(.*)::(.*)
+	<a href="\2" target="_blank">\1</a>
+
+// Download Link
+define dl@@(.*)::(.*)
+	<a href="$HOME/resource/\2" onclick="tk.countDL('\2');">\1</a>
+
+// Anchor
+define ^ANCHOR::(.*)
+	<div id="\1"></div>
+
+// Image
+define img::(.*)
+	<img src="$HOME/resource/image/\1" />
+
+define photo::(.*)
+	<img class="photo box-shadow" src="$HOME/resource/image/\1" />
+
+
+//----- Block
+// basic box
+define ^\[$
+	<div class="box box-shadow border-radius">
+	option indent
+
+define ^\]$
+	</div>
+	option unindent
+
+// indented box
+define ^\[-$
+	<div class="box_indent box-shadow border-radius">
+	option indent
+
+// mini black box (inline)
+define ^\[mb$
+	<div class="box_mini_black border-radius">
+	option indent
+
+// floating
+define ^left\[$
+	<div class="left">
+	option indent
+
+define ^clearfloat
+	<div class="clearfloat"></div>
+
+//----- Grid Layout
+define ^grid\[\[\[$
+	<div class="grid_container clearfix">
+	option indent
+
+define ^\]\]\]$
+	</div>
+	option unindent
+
+define ^gridstart$
+	<div class="grid_start"></div>
+
+define ^1\[\[$
+	<div class="grid1"><div class="grid_inner">
+	option indent
+
+define ^2\[\[$
+	<div class="grid2"><div class="grid_inner">
+	option indent
+
+define ^3\[\[$
+	<div class="grid3"><div class="grid_inner">
+	option indent
+
+define ^4\[\[$
+	<div class="grid4"><div class="grid_inner">
+	option indent
+
+define ^5\[\[$
+	<div class="grid5"><div class="grid_inner">
+	option indent
+
+define ^6\[\[$
+	<div class="grid6"><div class="grid_inner">
+	option indent
+
+define ^7\[\[$
+	<div class="grid7"><div class="grid_inner">
+	option indent
+
+define ^8\[\[$
+	<div class="grid8"><div class="grid_inner">
+	option indent
+
+define ^9\[\[$
+	<div class="grid9"><div class="grid_inner">
+	option indent
+
+define ^10\[\[$
+	<div class="grid10"><div class="grid_inner">
+	option indent
+
+define ^11\[\[$
+	<div class="grid11"><div class="grid_inner">
+	option indent
+
+define ^12\[\[$
+	<div class="grid12"><div class="grid_inner">
+	option indent
+
+define ^\]\]$
+	</div></div>
+	option unindent
+
+define ^areatest::(.*)$
+	<div class="areatest">\1</div>
+
+
+//----- Special
+define colorbar::(.*)
+	<div style="background-color: #\1; width: 5em; height 1em;"><em style="color: #\1;">_</em></div>
+
+
+//===== following elements are provided by template processing:
+// Table
+// Code (Preformatted text)
+
